@@ -40,4 +40,8 @@ const removeSchedule = (restaurantId, scheduleId) => {
   return destroy(`/restaurants/${restaurantId}/schedules/${scheduleId}`)
 }
 
-export { getAll, getDetail, getRestaurantCategories, create, update, remove, getRestaurantSchedules, createSchedule, updateSchedule, removeSchedule }
+const getRestaurantSchedule = async (restaurantId, scheduleId) => {
+  return (await getRestaurantSchedules(restaurantId)).find(schedule => schedule.id === scheduleId)
+}
+
+export { getAll, getDetail, getRestaurantCategories, create, update, remove, getRestaurantSchedules, createSchedule, updateSchedule, removeSchedule, getRestaurantSchedule }

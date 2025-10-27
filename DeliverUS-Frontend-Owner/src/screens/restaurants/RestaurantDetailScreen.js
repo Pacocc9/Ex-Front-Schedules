@@ -81,9 +81,20 @@ export default function RestaurantDetailScreen ({ navigation, route }) {
       >
         <TextRegular numberOfLines={2}>{item.description}</TextRegular>
         <TextSemiBold textStyle={styles.price}>{item.price.toFixed(2)}€</TextSemiBold>
-        {!item.availability &&
-          <TextRegular textStyle={styles.availability }>Not available</TextRegular>
-        }
+        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+          <View style={{flexDirection:'row', alignItems:'center'}}>
+            <MaterialCommunityIcons name='timetable' size={24} color={item.schedule ? GlobalStyles.brandGreen : GlobalStyles.brandPrimary}/>
+            {item.schedule &&
+              <TextRegular textStyle={{color : GlobalStyles.brandGreen}}>{item.schedule.startTime} - {item.schedule.endTime}</TextRegular>
+            }
+            {!item.schedule &&
+              <TextRegular textStyle={{color : GlobalStyles.brandPrimary}}>Not scheduled</TextRegular>
+            }
+          </View>
+          {!item.availability &&
+            <TextRegular textStyle={styles.availability }>Not available</TextRegular>
+          }
+        </View>
          <View style={styles.actionButtonsContainer}>
           <Pressable
             onPress={() => navigation.navigate('EditProductScreen', { id: item.id })
